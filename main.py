@@ -3,7 +3,8 @@ from telebot import TeleBot, types
 from random import randint
 # токен для бота
 from secret import token
-privet_word = "Добро пожаловать в квест"
+
+import markups as m
 # словарь картинок для квеста
 
 pictures = {
@@ -13,106 +14,51 @@ pictures = {
     3: "https://mylnaya-opera.ru/481-large_default/zagotovka-dlya-dekupazha-nadpis-informaciya.jpg",
     4: "https://mylnaya-opera.ru/481-large_default/zagotovka-dlya-dekupazha-nadpis-informaciya.jpg"}
 
-states = {}
-inventories = {}
 bot = TeleBot(token)
 
+states = {}
 
-@bot.message_handler(commands=["start"])
-def start_game(message):
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
     user = message.chat.id
-    # получаем уникальный id юзера
-    states[user] = 0
-    inventories[user] = []
-
-    bot.send_message(user, privet_word)
-
-    process_state(user, states[user], inventories[user])
+    states[user] = "0"
+    bot.send_message(
+        user, 'Привет, сегодня тебе предстоит пройти квест по лагерю "Чайка"! Готов начать?', reply_markup=m.start_markup)
 
 
 @bot.callback_query_handler(func=lambda call: True)
 def user_answer(call):
     user = call.message.chat.id
-    process_answer(user, call.data)
+    answer = call.data
 
+    if answer == 'вернуться':
+        states[user] = "0"
 
-def process_state(user, state, inventory):
-    kb = types.InlineKeyboardMarkup()
-
-    bot.send_photo(user, pictures[state])
-
-    if state == 0:
-        # вход
-        kb.add(types.InlineKeyboardButton(
-            text="пойти в дендропарк", callback_data="1"))
-        kb.add(types.InlineKeyboardButton(
-            text="пойти к 1 отряду", callback_data="2"))
-
-        bot.send_message(user, "Вы оказались в лагере чайка", reply_markup=kb)
-
-    if state == 1:
-
-        kb.add(types.InlineKeyboardButton(
-            text="подойти к фонтану", callback_data="1"))
-        kb.add(types.InlineKeyboardButton(
-            text="пройти к диджей зоне", callback_data="2"))
-
+    if states[user] == "0":
         bot.send_message(
-            user, "вы в дендропарке", reply_markup=kb)
+            user, 'Куда пойдешь?', reply_markup=m.begin_markup)
+        states[user] = "пошел"
 
-    if state == 2:
-        kb.add(types.InlineKeyboardButton(
-            text="ответ 1 диджейr", callback_data="1"))
-        kb.add(types.InlineKeyboardButton(
-            text="ответ 2 диджейr", callback_data="2"))
-        bot.send_message(user, "загадка диджей зона")
+    if answer == "1 отряд":
+        states[user] = "9"
+        bot.send_message(
+            user, 'Выбери', reply_markup=m.first_squad_markup)
 
-    if state == 3:
-        kb.add(types.InlineKeyboardButton(
-            text="ответ 1 фонтан ff", callback_data="1"))
-        kb.add(types.InlineKeyboardButton(
-            text="ответ 2 фонтанaa", callback_data="2"))
-        bot.send_message(user, "загадка фонтан")
+    if answer == "дендропарк":
+        states[user] = "9"
+        bot.send_message(
+            user, 'Выбери', reply_markup=m.first_squad_markup)
 
-    if state == 4:
-        bot.send_message(user, "вы у первого отряда")
-        kb.add(types.InlineKeyboardButton(
-            text="вернуться", callback_data="2"))
+    if answer == "1 ответ":
+        states[user] = "9"
+        bot.send_message(
+            user, 'правильно', reply_markup=m.back_first_markup)
 
-
-def process_answer(user, answer):
-    if states[user] == 0:
-        if answer == "1":
-            states[user] = 1
-            bot.send_message(user, "!!!!!!!!!!!!!!!!1")
-        elif answer == "2":
-            states[user] = 4
-
-    elif states[user] == 1:
-        # если фонтан
-        if answer == "1":
-            states[user] = 3
-        # если диджей зона
-        elif answer == "2":
-            states[user] = 2
-
-    # elif states[user] == 2:
-    #     if answer == "1":
-    #         bot.send_message(user,
-    #                          "Правильный ответ")
-    #     elif answer == "2":
-    #         bot.send_message(user,
-    #                          "Неправильный ответ")
-
-    # elif states[user] == 3:
-    #     if answer == "1":
-    #         bot.send_message(user,
-    #                          "Правильный ответ")
-    #     elif answer == "2":
-    #         bot.send_message(user,
-    #                          "Неправильный ответ")
-
-    process_state(user, states[user], inventories[user])
+    if answer == "2 ответ":
+        states[user] = "9"
+        bot.send_message(
+            user, 'неправильно', reply_markup=m.back_first_markup)
 
 
-bot.polling(none_stop=True)
+bot.polling(non_stop=True)
