@@ -45,10 +45,9 @@ def user_answer(call):
     if answer == 'вернуться':
         states[user] = "0"
 
-    if states[user] == "0":
+    if answer == "начало":
         bot.send_message(
-            user, 'Куда пойдешь?', reply_markup=m.begin_markup)
-        states[user] = "пошел"
+            user, ',hfdk cnfhc?', reply_markup=m.begin_markup)
 
     if answer == "1 отряд":
         states[user] = "1"
