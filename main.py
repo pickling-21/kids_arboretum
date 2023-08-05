@@ -1,10 +1,20 @@
 
+import markups as m
+import squad_1 as a
+import squad_2 as b
+import squad_3 as c
+import squad_4 as d
+import squad_5 as e
+import squad_6 as f
+
+
 from telebot import TeleBot, types
 from random import randint
-# токен для бота
-from secret import token
 
-import markups as m
+# токен для бота
+token = "6365845419:AAGzeRqMSyEFhoGQwJ4pdFd5f-R0kvGjtSI"
+
+
 # словарь картинок для квеста
 
 pictures = {
@@ -41,24 +51,34 @@ def user_answer(call):
         states[user] = "пошел"
 
     if answer == "1 отряд":
-        states[user] = "9"
+        states[user] = "1"
         bot.send_message(
-            user, 'Выбери', reply_markup=m.first_squad_markup)
+            user, a.privet, reply_markup=a.privet_markup)
 
-    if answer == "дендропарк":
-        states[user] = "9"
+    if answer == "2 отряд":
+        states[user] = "2"
         bot.send_message(
-            user, 'Выбери', reply_markup=m.first_squad_markup)
+            user, b.privet, reply_markup=b.privet_markup)
 
-    if answer == "1 ответ":
-        states[user] = "9"
+    if answer == "3 отряд":
+        states[user] = "3"
         bot.send_message(
-            user, 'правильно', reply_markup=m.back_first_markup)
+            user, c.privet, reply_markup=c.privet_markup)
 
-    if answer == "2 ответ":
-        states[user] = "9"
+    if answer == "4 отряд":
+        states[user] = "4"
         bot.send_message(
-            user, 'неправильно', reply_markup=m.back_first_markup)
+            user, d.privet, reply_markup=d.privet_markup)
+
+    if answer == "5 отряд":
+        states[user] = "5"
+        bot.send_message(
+            user, e.privet, reply_markup=e.privet_markup)
+
+    if answer == "6 отряд":
+        states[user] = "6"
+        bot.send_message(
+            user, f.privet, reply_markup=f.privet_markup)
 
 
 bot.polling(non_stop=True)

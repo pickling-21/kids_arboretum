@@ -13,7 +13,7 @@ begin_markup_btn1 = types.InlineKeyboardButton(
 begin_markup_btn2 = types.InlineKeyboardButton(
     text="2 отряд", callback_data="2 отряд")
 begin_markup_btn3 = types.InlineKeyboardButton(
-    text="3 отряд", callback_data="3 отряд")
+    text="3 район", callback_data="3 отряд")
 begin_markup_btn4 = types.InlineKeyboardButton(
     text="4 отряд", callback_data="4 отряд")
 begin_markup_btn5 = types.InlineKeyboardButton(
@@ -28,9 +28,20 @@ first_squad_markup_btn1 = types.InlineKeyboardButton(
     text="1. 1 ответ", callback_data="1 ответ")
 first_squad_markup_btn2 = types.InlineKeyboardButton(
     text="2. 2 ответ", callback_data="2 ответ")
-first_squad_markup.add(first_squad_markup_btn1, first_squad_markup_btn2)
+first_squad_markup_btn3 = types.InlineKeyboardButton(
+    text="3. 2 ответ", callback_data="3 ответ")
+first_squad_markup.add(first_squad_markup_btn1,
+                       first_squad_markup_btn2, first_squad_markup_btn3)
+
 
 back_first_markup = types.InlineKeyboardMarkup()
 back_first_markup_btn1 = types.InlineKeyboardButton(
     text="Вернуться", callback_data="вернуться")
 back_first_markup.add(back_first_markup_btn1)
+
+
+
+four_sqaud_markup = types.InlineKeyboardMarkup()
+four_sqaud_markup_btn1 = types.InlineKeyboardButton(
+    text="Миссию принял", callback_data="операция рад")
+four_sqaud_markup.add(four_sqaud_markup_btn1)
