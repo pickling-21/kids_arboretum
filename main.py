@@ -37,6 +37,30 @@ def start_message(message):
         user, 'Привет, сегодня тебе предстоит пройти квест по лагерю "Чайка"! Готов начать?', reply_markup=m.start_markup)
 
 
+@bot.message_handler(content_types=['text'])
+def send_text(message):
+    text = message.text
+    user = message.chat.id
+    # отправляем сообщение тому же пользователю с тем же текстом
+    if text == 'столб силы' and states[user] == '3':
+        bot.send_message(
+            user, c.global_warm, reply_markup=c.global_warm_markup)
+        states[user] = 'столб'
+    elif states[user] == '3':
+        bot.send_message(
+            user, "не то")
+
+
+@bot.message_handler(content_types=['video_note'])
+def send_video(message):
+    user = message.chat.id
+    # отправляем сообщение тому же пользователю с тем же текстом
+    if states[user] == '3 белка':
+        bot.send_message(user, 'пасибо')
+
+    bot.send_message(user, 'видео')
+
+
 @bot.callback_query_handler(func=lambda call: True)
 def user_answer(call):
     user = call.message.chat.id
@@ -47,23 +71,69 @@ def user_answer(call):
 
     if answer == "начало":
         bot.send_message(
-            user, ',hfdk cnfhc?', reply_markup=m.begin_markup)
+            user, 'Куда пойдем?', reply_markup=m.begin_markup)
 
     if answer == "1 отряд":
         states[user] = "1"
         bot.send_message(
             user, a.privet, reply_markup=a.privet_markup)
-
+# 2 район
     if answer == "2 отряд":
         states[user] = "2"
         bot.send_message(
             user, b.privet, reply_markup=b.privet_markup)
 
-    if answer == "3 отряд":
+    if answer == "2 кто я":
+        states[user] = "2 бутылка"
+        bot.send_message(
+            user, b.butilka, reply_markup=b.butilka_markup)
+
+    if answer == "2 понял" or answer == "2 да":
+        states[user] = "2 он бутылка"
+        bot.send_message(
+            user, b.sorting, reply_markup=b.sorting_markup)
+
+    if answer == "2 про сортировка":
+        bot.send_message(user, b.about_sorting,
+                         reply_markup=b.about_sorting_markup)
+        states[user] = "2 он бутылка"
+
+    if answer == "2 сортировка":
+        bot.send_message(user, b.sorting_ex, reply_markup=b.sorting_ex_markup)
+
+    # 3 район
+    if answer == "3 отряд" or states[user] == "3":
         states[user] = "3"
         bot.send_message(
-            user, c.privet, reply_markup=c.privet_markup)
+            user, c.privet)
 
+    if states[user] == 'столб':
+        states[user] = "бор"
+
+    if answer == '1 поможет':
+        states[user] = "1 помощь"
+        bot.send_message(user, c.next, reply_markup=c.next_markup)
+
+    if answer == 'белка':
+        states[user] = '3 белка'
+        bot.send_message(user, c.belka_more, parse_mode='Markdown')
+        bot.send_message(user, c.belka)
+
+    if answer == '2 плохая концовка':
+        states[user] = "3 злой"
+        bot.send_message(
+            user, c.bad)
+
+    if answer == '3 глобальное потепление':
+        states[user] = "3 потепление"
+        bot.send_message(
+            user, c.warming)
+
+    if answer == "назад 2":
+        states[user] = "бор"
+
+
+# 4 отряд
     if answer == "4 отряд":
         states[user] = "4"
         bot.send_message(
@@ -72,7 +142,7 @@ def user_answer(call):
     if answer == "5 отряд":
         states[user] = "5"
         bot.send_message(
-            user, e.privet, reply_markup=e.privet_markup)
+            user, e.privet)
 
     if answer == "6 отряд":
         states[user] = "6"
