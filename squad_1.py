@@ -1,3 +1,4 @@
+from secret import *
 from telebot import types
 
 privet = '''Добро пожаловать, путники!
@@ -15,3 +16,10 @@ privet_markup_btn3 = types.InlineKeyboardButton(
     text="3. 2 ответ", callback_data="3 ответ")
 privet_markup.add(privet_markup_btn1,
                   privet_markup_btn2, privet_markup_btn3)
+
+
+def send_query(user, answer):
+    if answer == "1 отряд":
+        states[user] = "1"
+        bot.send_message(
+            user, privet, reply_markup=privet_markup)

@@ -6,10 +6,8 @@ start_markup_btn1 = types.InlineKeyboardButton(
 start_markup.add(start_markup_btn1)
 
 begin_markup = types.InlineKeyboardMarkup()
-begin_markup_btn0 = types.InlineKeyboardButton(
-    text="1 отряд", callback_data="1 отряд")
 begin_markup_btn1 = types.InlineKeyboardButton(
-    text="Дендропарк", callback_data="дендропарк")
+    text="1 отряд", callback_data="1 отряд")
 begin_markup_btn2 = types.InlineKeyboardButton(
     text="2 отряд", callback_data="2 отряд")
 begin_markup_btn3 = types.InlineKeyboardButton(
@@ -19,9 +17,9 @@ begin_markup_btn4 = types.InlineKeyboardButton(
 begin_markup_btn5 = types.InlineKeyboardButton(
     text="5 отряд", callback_data="5 отряд")
 begin_markup_btn6 = types.InlineKeyboardButton(
-    text="5 отряд", callback_data="5 отряд")
-begin_markup.add(begin_markup_btn0, begin_markup_btn1,
-                 begin_markup_btn2, begin_markup_btn3, begin_markup_btn4, begin_markup_btn6)
+    text="6 отряд", callback_data="6 отряд")
+begin_markup.add(begin_markup_btn1,
+                 begin_markup_btn2, begin_markup_btn3, begin_markup_btn4, begin_markup_btn5, begin_markup_btn6)
 
 first_squad_markup = types.InlineKeyboardMarkup()
 first_squad_markup_btn1 = types.InlineKeyboardButton(
@@ -38,7 +36,6 @@ back_first_markup = types.InlineKeyboardMarkup()
 back_first_markup_btn1 = types.InlineKeyboardButton(
     text="Вернуться", callback_data="вернуться")
 back_first_markup.add(back_first_markup_btn1)
-
 
 
 four_sqaud_markup = types.InlineKeyboardMarkup()
