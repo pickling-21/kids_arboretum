@@ -25,26 +25,45 @@ def start_message(message):
 def send_text(message):
     text = message.text
     user = message.chat.id
-    c.send_text(user, text)
+    a.send_text(user, text)
+    f.send_text(user, text)
+    if c.send_text(user, text) == False and curr_squad == 3:
+        bot.send_message(user, 'не то')
+    if d.send_text(user, text) == False and curr_squad == 4:
+        bot.send_message(user, 'не то')
+    if e.send_text(user, text) == False and curr_squad == 5:
+        bot.send_message(user, 'не то')
+
     # отправляем сообщение тому же пользователю с тем же текстом
 
 
-@bot.message_handler(content_types=['video_note'])
+@bot.message_handler(content_types=['video_note', 'video'])
 def send_video(message):
     user = message.chat.id
     # отправляем сообщение тому же пользователю с тем же текстом
     if states[user] == '3 белка':
         bot.send_message(user, c.thanks, reply_markup=c.thanks_markup)
         states[user] = "1 видио есть"
+    e.send_video(user)
+    b.send_video(user)
+
+
+@bot.message_handler(content_types=['photo'])
+def send_video(message):
+    user = message.chat.id
+    e.send_photo(user)
+    d.send_photo(user)
 
 
 @bot.message_handler(content_types=['voice'])
-def send_video(message):
+def send_voice(message):
     user = message.chat.id
     # отправляем сообщение тому же пользователю с тем же текстом
     if states[user] == 'ждем веер':
         bot.send_message(user, c.veer)
         states[user] = "веер"
+
+    e.send_voice(user)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -53,7 +72,7 @@ def user_answer(call):
     answer = call.data
 
     if answer == 'вернуться':
-        states[user] = "0"
+        answer = 'начало'
 
     if answer == "начало":
         bot.send_message(
