@@ -1,5 +1,5 @@
 from telebot import TeleBot, types
-token = "6365845419:AAGzeRqMSyEFhoGQwJ4pdFd5f-R0kvGjtSI"
+token = "6673942493:AAHUrkWJ0aifez1iwFPlUY5X5QvFywwLIAA"
 
 curr_squad = 0
 

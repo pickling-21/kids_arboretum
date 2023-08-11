@@ -74,7 +74,13 @@ def user_answer(call):
     if answer == 'вернуться':
         answer = 'начало'
 
+    if answer == 'правила':
+        bot.send_message(user, m.pravila, parse_mode='Markdown',
+                         reply_markup=m.pravila_markup)
+
     if answer == "начало":
+        bot.send_photo(user, m.karta)
+        bot.send_message(user, m.poryadok)
         bot.send_message(
             user, 'Куда пойдем?', reply_markup=m.begin_markup)
 
