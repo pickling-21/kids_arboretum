@@ -1,4 +1,4 @@
-import markups as m
+from squads import markups as m
 from squads import squad_1 as a
 from squads import squad_2 as b
 from squads import squad_3 as c
