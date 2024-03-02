@@ -1,5 +1,5 @@
 from telebot import types
-from secret import *
+from squads.data import *
 
 privet = '''Здравствуйте!
 Вам нужно найти чайку, и она подскажет вам ключевое слово. Введите его в чат.  

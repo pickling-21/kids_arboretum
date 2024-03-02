@@ -1,4 +1,4 @@
-from secret import *
+from squads.data import *
 from telebot import types
 
 privet = '''Привет дорогой друг!

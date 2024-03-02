@@ -1,5 +1,5 @@
 from telebot import types
-from secret import *
+from squads.data import *
 
 pictures = {
     1: 'https://imageup.ru/img168/4469380/kandinsky-download-1691646268525.jpg',

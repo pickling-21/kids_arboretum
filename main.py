@@ -1,20 +1,15 @@
 import markups as m
-import squad_1 as a
-import squad_2 as b
-import squad_3 as c
-import squad_4 as d
-import squad_5 as e
-import squad_6 as f
+from squads import squad_1 as a
+from squads import squad_2 as b
+from squads import squad_3 as c
+from squads import squad_4 as d
+from squads import squad_5 as e
+from squads import squad_6 as f
 
-from secret import *
+from squads.data import *
 from telebot import TeleBot, types
 from random import randint
 
-curr_squad = 0
-
-bot = TeleBot(token)
-
-states = {}
 # словарь картинок для квеста
 
 
