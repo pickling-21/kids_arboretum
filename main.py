@@ -10,6 +10,11 @@ from secret import *
 from telebot import TeleBot, types
 from random import randint
 
+curr_squad = 0
+
+bot = TeleBot(token)
+
+states = {}
 # словарь картинок для квеста
 
 
@@ -92,4 +97,7 @@ def user_answer(call):
     f.send_query(user, answer)
 
 
-bot.polling(non_stop=True)
+
+if __name__ == "__main__":
+    
+    bot.polling(non_stop=True)
