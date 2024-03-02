@@ -1,4 +1,4 @@
-from kids_arboretum.data import *
+from squads.data import *
 from telebot import types
 
 privet_picture = 'https://imageup.ru/img12/4471025/kandinsky-download-1691707448138.jpg'
