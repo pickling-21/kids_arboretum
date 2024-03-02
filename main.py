@@ -10,8 +10,6 @@ from squads.data import *
 from telebot import TeleBot, types
 from random import randint
 
-# словарь картинок для квеста
-
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
